@@ -1,4 +1,4 @@
-name: "publish" # Production Build Workflow
+name: "publish"
 
 on:
   push:
