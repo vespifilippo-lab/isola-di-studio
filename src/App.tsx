@@ -189,7 +189,7 @@ export default function App() {
             <motion.div 
               key={currentView} 
               className="h-full max-w-7xl mx-auto" 
-              variants={pageVariants} 
+              variants={pageVariants as any} 
               initial="initial" 
               animate="enter" 
               exit="exit"

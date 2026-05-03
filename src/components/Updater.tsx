@@ -4,7 +4,6 @@ import { ask, message } from '@tauri-apps/plugin-dialog';
 import { relaunch } from '@tauri-apps/plugin-process';
 
 export default function Updater() {
-  const [checking, setChecking] = useState(false);
 
   useEffect(() => {
     // Check for updates on mount (optional)
@@ -13,7 +12,6 @@ export default function Updater() {
 
   async function checkForUpdates(manual: boolean) {
     try {
-      setChecking(true);
       const update = await check();
       
       if (update) {
@@ -37,8 +35,6 @@ export default function Updater() {
       if (manual) {
         await message(`Failed to check for updates: ${error}`, { title: 'Error', kind: 'error' });
       }
-    } finally {
-      setChecking(false);
     }
   }
 
