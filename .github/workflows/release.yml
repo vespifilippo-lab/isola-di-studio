@@ -24,14 +24,11 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: install dependencies (ubuntu only)
-        if: matrix.platform == 'ubuntu-22.04'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
-      
-      - name: install frontend dependencies
+      - name: install dependencies
         run: npm install
+
+      - name: build frontend
+        run: npm run build
 
       - uses: tauri-apps/tauri-action@v0
         env:
@@ -39,8 +36,8 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
-          tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
+          tagName: v__VERSION__
           releaseName: "Isola di Studio v__VERSION__"
-          releaseBody: "Nuovo aggiornamento per Isola di Studio!"
+          releaseBody: "Nuovo aggiornamento per Isola di Studio! Include miglioramenti UI, gestione errori e controllo di chiusura."
           releaseDraft: true
           prerelease: false
